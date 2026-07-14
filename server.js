@@ -1,6 +1,9 @@
 import express from 'express';
-import path from 'path';
 import { fileURLToPath } from 'url';
+import path from 'path';
+import { testConnection } from './src/models/db.js';
+import { getAllOrganizations } from './src/models/organizations.js';
+
 
 const app = express();
 
@@ -40,8 +43,12 @@ app.get('/', (req, res) => {
 });
 
 app.get('/organizations', (req, res) => {
+    const organizations = await getAllOrganizations();
+    console.log('Organizations:', organizations); // Log the retrieved organizations for debugging
+
     const title = 'Organizations';
-    res.render('organizations', { title });
+    res.render('organizations', { title, organizations });
+    
 });
 
 app.get('/projects', (req, res) => {
@@ -54,8 +61,15 @@ app.get("/categories", (req, res) => {
     res.render('categories', { title });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running at http://127.0.0.1:${PORT}`);
-  console.log(`Environment: ${NODE_ENV}`);
-  console.log(`Views folder: ${path.join(__dirname, "src", "views")}`);
+app.listen(PORT, async () => {
+
+    try {
+        await testConnection();
+        console.log(`Server is running at http://127.0.0.1:${PORT}`);
+        console.log(`Environment: ${NODE_ENV}`);
+    }
+    catch (error) {
+        console.error('Failed to start server due to database connection error:', error.message);
+        process.exit(1); // Exit the process with an error code
+    }
 });
