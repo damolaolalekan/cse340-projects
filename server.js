@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllCategories } from './src/models/categories.js';
 
 
 const app = express();
@@ -42,13 +43,19 @@ app.get('/', (req, res) => {
     res.render('home', { title });
 });
 
-app.get('/organizations', (req, res) => {
-    const organizations = await getAllOrganizations();
-    console.log('Organizations:', organizations); // Log the retrieved organizations for debugging
+app.get('/organizations', async (req, res) => {
+    try {
+        const organizations = await getAllOrganizations();
+        console.log(organizations);
 
-    const title = 'Organizations';
-    res.render('organizations', { title, organizations });
-    
+        res.render('organizations', {
+            title: 'Organizations',
+            organizations
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving organizations');
+    }
 });
 
 app.get('/projects', (req, res) => {
@@ -56,10 +63,6 @@ app.get('/projects', (req, res) => {
     res.render('projects', { title });
 });
 
-app.get("/categories", (req, res) => {
-    const title = 'Categories';
-    res.render('categories', { title });
-});
 
 app.listen(PORT, async () => {
 
@@ -71,5 +74,20 @@ app.listen(PORT, async () => {
     catch (error) {
         console.error('Failed to start server due to database connection error:', error.message);
         process.exit(1); // Exit the process with an error code
+    }
+});
+
+
+app.get('/categories', async (req, res) => {
+    try {
+        const categories = await getAllCategories();
+
+        res.render('categories', {
+            title: 'Categories',
+            categories
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving categories');
     }
 });
