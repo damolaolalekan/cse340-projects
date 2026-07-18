@@ -4,7 +4,7 @@ import path from 'path';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllCategories } from './src/models/categories.js';
-
+import { getAllProjects } from "./src/models/projects.js";
 
 const app = express();
 
@@ -89,5 +89,22 @@ app.get('/categories', async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving categories');
+    }
+});
+
+app.get('/projects', async (req, res) => {
+    try {
+        const projects = await getAllProjects();
+
+        console.log(projects); // Verify the query works
+
+        res.render('projects', {
+            title: 'Projects',
+            projects
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Error retrieving projects');
     }
 });
