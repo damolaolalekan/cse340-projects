@@ -6,6 +6,8 @@ export async function getAllProjects() {
             p.project_id,
             p.name,
             p.description,
+            p.location,
+            p.project_date,
             o.name AS organization
         FROM project p
         JOIN organization o

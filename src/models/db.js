@@ -13,7 +13,9 @@ import { Pool } from 'pg';
  */
 const pool = new Pool({
     connectionString: process.env.DB_URL,
-    ssl: true
+    ssl: {
+         rejectUnauthorized: false
+    }
 });
 
 /**
@@ -50,17 +52,17 @@ if (process.env.NODE_ENV === 'development' && process.env.ENABLE_SQL_LOGGING ===
                 const start = Date.now();
                 const res = await pool.query(text, params);
                 const duration = Date.now() - start;
-                console.log('Executed query:', { 
+
+                console.log({ 
                     text: text.replace(/\s+/g, ' ').trim(), 
                     duration: `${duration}ms`, 
                     rows: res.rowCount 
                 });
+
                 return res;
             } catch (error) {
-                console.error('Error in query:', { 
-                    text: text.replace(/\s+/g, ' ').trim(), 
-                    error: error.message 
-                });
+                console.error('Error in query:');
+                console.error(error);   // Changed to show the full error
                 throw error;
             }
         },
@@ -83,7 +85,8 @@ const testConnection = async() => {
         console.log('Database connection successful:', result.rows[0].current_time);
         return true;
     } catch (error) {
-        console.error('Database connection failed:', error.message);
+        console.error('Database connection failed:');
+        console.error(error);
         throw error;
     }
 };

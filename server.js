@@ -52,15 +52,11 @@ app.get('/organizations', async (req, res) => {
             title: 'Organizations',
             organizations
         });
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Error retrieving organizations');
     }
-});
-
-app.get('/projects', (req, res) => {
-    const title = 'Projects';
-    res.render('projects', { title });
 });
 
 
@@ -72,8 +68,9 @@ app.listen(PORT, async () => {
         console.log(`Environment: ${NODE_ENV}`);
     }
     catch (error) {
-        console.error('Failed to start server due to database connection error:', error.message);
-        process.exit(1); // Exit the process with an error code
+    console.error('Failed to start server due to database connection error:');
+    console.error(error);
+    process.exit(1); // Exit the process with an error code
     }
 });
 
