@@ -98,27 +98,121 @@ INSERT INTO project (
     organization_id
 )
 VALUES
+
+-- BrightFuture Builders (Organization 1)
+
 (
-    'Community Park Renovation',
-    'Help renovate and beautify the neighborhood park.',
-    'St. Catharines',
-    '2026-08-15',
-    1
+'Community Park Renovation',
+'Help renovate and beautify the neighborhood park.',
+'St. Catharines',
+'2026-08-15',
+1
 ),
 (
-    'Urban Garden Workshop',
-    'Teach residents how to grow sustainable food.',
-    'Niagara Falls',
-    '2026-09-05',
-    2
+'River Cleanup',
+'Remove litter from local rivers.',
+'Niagara Falls',
+'2026-08-22',
+1
 ),
 (
-    'Food Bank Volunteer Day',
-    'Assist local food banks with sorting and distributing food.',
-    'Welland',
-    '2026-10-10',
-    3
+'Tree Planting Day',
+'Plant trees throughout the community.',
+'Welland',
+'2026-09-01',
+1
+),
+(
+'Playground Repair',
+'Repair playground equipment for children.',
+'Thorold',
+'2026-09-12',
+1
+),
+(
+'Community Shelter Painting',
+'Paint and restore the local homeless shelter.',
+'St. Catharines',
+'2026-09-25',
+1
+),
+
+-- GreenHarvest Growers (Organization 2)
+
+(
+'Urban Garden Workshop',
+'Teach residents how to grow sustainable food.',
+'Niagara Falls',
+'2026-09-05',
+2
+),
+(
+'School Garden Project',
+'Create vegetable gardens at local schools.',
+'Welland',
+'2026-09-15',
+2
+),
+(
+'Community Compost Program',
+'Teach composting and reduce food waste.',
+'Fort Erie',
+'2026-09-22',
+2
+),
+(
+'Farmers Market Support',
+'Assist local farmers during weekend markets.',
+'St. Catharines',
+'2026-10-03',
+2
+),
+(
+'Greenhouse Volunteer Day',
+'Help maintain community greenhouses.',
+'Niagara-on-the-Lake',
+'2026-10-18',
+2
+),
+
+-- UnityServe Volunteers (Organization 3)
+
+(
+'Food Bank Volunteer Day',
+'Assist local food banks with sorting and distributing food.',
+'Welland',
+'2026-10-10',
+3
+),
+(
+'Senior Assistance Program',
+'Visit seniors and assist with daily activities.',
+'Thorold',
+'2026-10-16',
+3
+),
+(
+'Community Tutoring',
+'Tutor elementary and high school students.',
+'St. Catharines',
+'2026-10-24',
+3
+),
+(
+'Holiday Food Drive',
+'Collect food donations for families in need.',
+'Niagara Falls',
+'2026-11-08',
+3
+),
+(
+'Charity Clothing Collection',
+'Collect and organize clothing donations.',
+'Fort Erie',
+'2026-11-20',
+3
 );
+
 
 -- ========================================
 -- Project Category Table
@@ -147,12 +241,42 @@ CREATE TABLE project_category (
 
 INSERT INTO project_category (project_id, category_id)
 VALUES
-(1, 1),
-(1, 3),
-(2, 1),
-(2, 2),
-(3, 3),
-(3, 4);
+
+-- Projects 1-5
+(1,1),
+(1,3),
+
+(2,1),
+
+(3,1),
+
+(4,3),
+
+(5,3),
+
+-- Projects 6-10
+(6,2),
+(6,1),
+
+(7,2),
+
+(8,1),
+
+(9,3),
+
+(10,1),
+
+-- Projects 11-15
+(11,3),
+(11,4),
+
+(12,4),
+
+(13,2),
+
+(14,3),
+
+(15,3);
 
 -- ========================================
 -- Verify the Data
